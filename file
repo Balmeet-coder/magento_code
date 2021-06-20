@@ -1,0 +1,518 @@
+<!--
+Magento is a open source CMS platform or we say that Content management System.this uses Php and also written in php.It uses multiple Php framework 
+such as Laminas and Symfony.Magento source code is distributed under open software.
+Installing in different OS:
+(web server software)
+Windows : Xamps 
+Linux: Lamp Stack 
+Mac OS : Mamp/ pro
+Ide or compiler  we use: 
+PhpStorm
+XML studio
+Sublime 
+-->
+<!----         Starting of code   --->
+<?xml version="1.0"?>
+<layout version="0.1.0">
+<!--
+layout is creating into this and loads the page
+-->
+
+    <default translate="label" module="page">
+        <label>All Pages</label>
+        <block type="page/html" name="root" output="toHtml" template="page/3columns.phtml">
+
+            <block type="page/html_head" name="head" as="head">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs" ifconfig="dev/js/deprecation"><script>prototype/deprecation.js</script></action>
+                <action method="addJs"><script>lib/ccard.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>scriptaculous/builder.js</script></action>
+                <action method="addJs"><script>scriptaculous/effects.js</script></action>
+                <action method="addJs"><script>scriptaculous/dragdrop.js</script></action>
+                <action method="addJs"><script>scriptaculous/controls.js</script></action>
+                <action method="addJs"><script>scriptaculous/slider.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+                <action method="addJs"><script>varien/form.js</script></action>
+                <action method="addJs"><script>varien/menu.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>mage/cookies.js</script></action>
+                
+                <block type="page/js_cookie" name="js_cookies" template="page/js/cookie.phtml"/>
+
+                <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>
+                <action method="addItem"><type>skin_css</type><name>css/styles-ie.css</name><params/><if>lt IE 8</if></action>
+                <action method="addCss"><stylesheet>css/widgets.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/print.css</stylesheet><params>media="print"</params></action>
+
+                <action method="addItem"><type>js</type><name>lib/ds-sleight.js</name><params/><if>lt IE 7</if></action>
+                <action method="addItem"><type>skin_js</type><name>js/ie6.js</name><params/><if>lt IE 7</if></action>
+            </block>
+
+            <block type="core/text_list" name="after_body_start" as="after_body_start" translate="label">
+                <label>Page Top</label>
+            </block>
+
+            <block type="page/html_notices" name="global_notices" as="global_notices" template="page/html/notices.phtml" />
+
+            <block type="page/html_header" name="header" as="header">
+                <block type="page/template_links" name="top.links" as="topLinks"/>
+                <block type="page/switch" name="store_language" as="store_language" template="page/switch/languages.phtml"/>
+                <block type="core/text_list" name="top.menu" as="topMenu" translate="label">
+                    <label>Navigation Bar</label>
+                </block>
+                <block type="page/html_wrapper" name="top.container" as="topContainer" translate="label">
+                    <label>Page Header</label>
+                    <action method="setElementClass"><value>top-container</value></action>
+                </block>
+            </block>
+
+            <block type="page/html_breadcrumbs" name="breadcrumbs" as="breadcrumbs"/>
+
+            <block type="core/text_list" name="left" as="left" translate="label">
+                <label>Left Column</label>
+            </block>
+
+            <block type="core/messages" name="global_messages" as="global_messages"/>
+            <block type="core/messages" name="messages" as="messages"/>
+
+            <block type="core/text_list" name="content" as="content" translate="label">
+                <label>Main Content Area</label>
+            </block>
+
+            <block type="core/text_list" name="right" as="right" translate="label">
+                <label>Right Column</label>
+            </block>
+
+            <block type="page/html_footer" name="footer" as="footer" template="page/html/footer.phtml">
+                <block type="page/html_wrapper" name="bottom.container" as="bottomContainer" translate="label">
+                    <label>Page Footer</label>
+                    <action method="setElementClass"><value>bottom-container</value></action>
+                </block>
+                <block type="page/switch" name="store_switcher" as="store_switcher" template="page/switch/stores.phtml"/>
+                <block type="page/template_links" name="footer_links" as="footer_links" template="page/template/links.phtml"/>
+            </block>
+
+            <block type="core/text_list" name="before_body_end" as="before_body_end" translate="label">
+                <label>Page Bottom</label>
+            </block>
+        </block>
+
+        <block type="core/profiler" output="toHtml" name="core_profiler"/>
+    </default>
+
+    <print translate="label" module="page">
+        <label>All Pages (Print Version)</label>
+        <!-- Mage_Page -->
+        <block type="page/html" name="root" output="toHtml" template="page/print.phtml">
+
+            <block type="page/html_head" name="head" as="head">
+                <action method="addJs"><script>prototype/prototype.js</script></action>
+                <action method="addJs"><script>mage/translate.js</script></action>
+                <action method="addJs"><script>lib/ccard.js</script></action>
+                <action method="addJs"><script>prototype/validation.js</script></action>
+                <action method="addJs"><script>varien/js.js</script></action>
+
+                <action method="addCss"><stylesheet>css/styles.css</stylesheet></action>
+                <action method="addItem"><type>skin_css</type><name>css/styles-ie.css</name><params/><if>lt IE 8</if></action>
+                <action method="addCss"><stylesheet>css/widgets.css</stylesheet></action>
+                <action method="addCss"><stylesheet>css/print.css</stylesheet><params>media="print"</params></action>
+
+                <action method="addItem"><type>js</type><name>lib/ds-sleight.js</name><params/><if>lt IE 7</if></action>
+                <action method="addItem"><type>skin_js</type><name>js/ie6.js</name><params/><if>lt IE 7</if></action>
+
+            </block>
+
+            <block type="core/text_list" name="content" as="content" translate="label">
+                <label>Main Content Area</label>
+            </block>
+
+        </block>
+    </print>
+
+     <!-- Custom page layout handles -->
+    <page_empty translate="label">
+        <label>All Empty Layout Pages</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/empty.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_empty>
+
+    <page_one_column translate="label">
+        <label>All One-Column Layout Pages</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/1column.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_one_column>
+
+    <page_two_columns_left translate="label">
+        <label>All Two-Column Layout Pages (Left Column)</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-left.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_two_columns_left>
+
+    <page_two_columns_right translate="label">
+        <label>All Two-Column Layout Pages (Right Column)</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/2columns-right.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_two_columns_right>
+
+    <page_three_columns translate="label">
+        <label>All Three-Column Layout Pages</label>
+        <reference name="root">
+            <action method="setTemplate"><template>page/3columns.phtml</template></action>
+            <!-- Mark root page block that template is applied -->
+            <action method="setIsHandle"><applied>1</applied></action>
+        </reference>
+    </page_three_columns>
+</layout>
+
+
+<!----------- next code     --->
+<!--
+Meet table table creation 
+-->  
+<?xml version="1.0"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="admin_analytics_usage_version_log" resource="default" engine="innodb"
+           comment="Admin Notification Viewer Log Table">
+        <column xsi:type="int" name="id" unsigned="true" nullable="false" identity="true"
+                comment="Log ID"/>
+        <column xsi:type="varchar" name="last_viewed_in_version" nullable="false" length="50"
+                comment="Viewer last viewed on product version"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="ADMIN_ANALYTICS_USAGE_VERSION_LOG_LAST_VIEWED_IN_VERSION">
+            <column name="last_viewed_in_version"/>
+        </constraint>
+    </table>
+</schema>
+
+<!--- third code --->
+
+<?xml version="1.0"?>
+<!--
+Library creation with Jquery and xml studio
+-->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <images module="Magento_Catalog">
+            <image id="bundled_product_customization_page" type="thumbnail">
+                <width>140</width>
+                <height>140</height>
+            </image>
+            <image id="cart_cross_sell_products" type="thumbnail">
+                <width>200</width>
+                <height>248</height>
+            </image>
+            <image id="cart_page_product_thumbnail" type="small_image">
+                <width>165</width>
+                <height>165</height>
+            </image>
+            <image id="category_page_grid" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="category_page_grid-1" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="category_page_list" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="customer_account_my_tags_tag_view" type="small_image">
+                <width>100</width>
+                <height>100</height>
+            </image>
+            <image id="customer_account_product_review_page" type="image">
+                <width>285</width>
+                <height>285</height>
+            </image>
+            <image id="customer_shared_wishlist" type="small_image">
+                <width>113</width>
+                <height>113</height>
+            </image>
+            <image id="gift_messages_checkout_small_image" type="small_image">
+                <width>75</width>
+                <height>75</height>
+            </image>
+            <image id="gift_messages_checkout_thumbnail" type="thumbnail">
+                <width>100</width>
+                <height>100</height>
+            </image>
+            <image id="mini_cart_product_thumbnail" type="thumbnail">
+                <width>75</width>
+                <height>75</height>
+            </image>
+            <image id="new_products_content_widget_grid" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="new_products_content_widget_list" type="small_image">
+                <width>270</width>
+                <height>340</height>
+            </image>
+            <image id="new_products_images_only_widget" type="small_image">
+                <width>78</width>
+                <height>78</height>
+            </image>
+            <image id="product_base_image" type="image">
+                <width>265</width>
+                <height>265</height>
+            </image>
+            <image id="product_comparison_list" type="small_image">
+                <width>140</width>
+                <height>140</height>
+            </image>
+            <image id="product_page_image_large" type="image"/>
+            <image id="product_page_image_medium" type="image">
+                <width>700</width>
+                <height>560</height>
+            </image>
+            <image id="product_page_image_small" type="thumbnail">
+                <width>88</width>
+                <height>110</height>
+            </image>
+            <image id="product_page_main_image" type="image">
+                <width>700</width>
+                <height>560</height>
+            </image>
+            <image id="product_page_main_image_default" type="image">
+                <width>700</width>
+                <height>560</height>
+            </image>
+            <image id="product_page_more_views" type="thumbnail">
+                <width>88</width>
+                <height>110</height>
+            </image>
+            <image id="product_stock_alert_email_product_image" type="small_image">
+                <width>76</width>
+                <height>76</height>
+            </image>
+            <image id="product_small_image" type="small_image">
+                <width>135</width>
+                <height>135</height>
+            </image>
+            <image id="product_thumbnail_image" type="thumbnail">
+                <width>75</width>
+                <height>75</height>
+            </image>
+            <image id="recently_compared_products_grid_content_widget" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="recently_compared_products_images_names_widget" type="thumbnail">
+                <width>75</width>
+                <height>90</height>
+            </image>
+            <image id="recently_compared_products_images_only_widget" type="thumbnail">
+                <width>76</width>
+                <height>76</height>
+            </image>
+            <image id="recently_compared_products_list_content_widget" type="small_image">
+                <width>270</width>
+                <height>340</height>
+            </image>
+            <image id="recently_viewed_products_grid_content_widget" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="recently_viewed_products_images_names_widget" type="small_image">
+                <width>75</width>
+                <height>90</height>
+            </image>
+            <image id="recently_viewed_products_images_only_widget" type="small_image">
+                <width>76</width>
+                <height>76</height>
+            </image>
+            <image id="recently_viewed_products_list_content_widget" type="small_image">
+                <width>270</width>
+                <height>340</height>
+            </image>
+            <image id="related_products_list" type="small_image">
+                <width>152</width>
+                <height>190</height>
+            </image>
+            <image id="review_page_product_image" type="small_image">
+                <width>285</width>
+                <height>285</height>
+            </image>
+            <image id="rss_thumbnail" type="thumbnail">
+                <width>75</width>
+                <height>75</height>
+            </image>
+            <image id="sendfriend_small_image" type="small_image">
+                <width>75</width>
+                <height>75</height>
+            </image>
+            <image id="shared_wishlist_email" type="small_image">
+                <width>135</width>
+                <height>135</height>
+            </image>
+            <image id="side_column_widget_product_thumbnail" type="thumbnail">
+                <width>75</width>
+                <height>90</height>
+            </image>
+            <image id="upsell_products_list" type="small_image">
+                <width>152</width>
+                <height>190</height>
+            </image>
+            <image id="wishlist_sidebar_block" type="thumbnail">
+                <width>75</width>
+                <height>90</height>
+            </image>
+            <image id="wishlist_small_image" type="small_image">
+                <width>113</width>
+                <height>113</height>
+            </image>
+            <image id="wishlist_thumbnail" type="small_image">
+                <width>240</width>
+                <height>300</height>
+            </image>
+        </images>
+    </media>
+    <vars module="Magento_Catalog">
+
+        <!-- Gallery and magnifier theme settings. Start -->
+        <var name="gallery">
+            <var name="nav">thumbs</var> <!-- Gallery navigation style (false/thumbs/dots) -->
+            <var name="loop">true</var> <!-- Gallery navigation loop (true/false) -->
+            <var name="keyboard">true</var> <!-- Turn on/off keyboard arrows navigation (true/false) -->
+            <var name="arrows">true</var> <!-- Turn on/off arrows on the sides preview (true/false) -->
+            <var name="caption">false</var> <!-- Display alt text as image title (true/false) -->
+            <var name="allowfullscreen">true</var> <!-- Turn on/off fullscreen (true/false) -->
+            <var name="navdir">horizontal</var> <!-- Sliding direction of thumbnails (horizontal/vertical) -->
+            <var name="navarrows">true</var> <!-- Turn on/off on the thumbs navigation sides arrows(true/false) -->
+            <var name="navtype">slides</var> <!-- Sliding type of thumbnails (slides/thumbs) -->
+            <var name="transition">
+                <var name="effect">slide</var> <!-- Sets transition effect for slides changing (slide/crossfade/dissolve) -->
+                <var name="duration">500</var> <!-- Sets transition duration in ms -->
+            </var>
+            <var name="fullscreen">
+                <var name="nav">thumbs</var> <!-- Fullscreen navigation style (false/thumbs/dots) -->
+                <var name="loop">true</var> <!-- Fullscreen navigation loop (true/false/null) -->
+                <var name="arrows">true</var> <!-- Turn on/off arrows on the sides preview in fullscreen (true/false/null) -->
+                <var name="caption">false</var> <!-- Display alt text as image title in fullscreen(true/false) -->
+                <var name="navdir">horizontal</var> <!--Sliding direction of thumbnails in fullscreen(horizontal/vertical)  -->
+                <var name="navarrows">false</var> <!-- Turn on/off on the thumbs navigation sides arrows(true/false) -->
+                <var name="navtype">slides</var> <!-- Sliding type of thumbnails (slides/thumbs) -->
+                <var name="transition">
+                    <var name="effect">slide</var> <!-- Sets transition effect for slides changing (slide/crossfade/dissolve) -->
+                    <var name="duration">500</var> <!-- Sets transition duration in ms -->
+                </var>
+            </var>
+        </var>
+
+        <var name="magnifier">
+            <var name="fullscreenzoom">20</var>  <!-- Zoom for fullscreen (integer)-->
+            <var name="top"></var> <!-- Top position of magnifier -->
+            <var name="left"></var> <!-- Left position of magnifier -->
+            <var name="width"></var> <!-- Width of magnifier block -->
+            <var name="height"></var> <!-- Height of magnifier block -->
+            <var name="eventType">hover</var> <!-- Action that atcivates zoom (hover/click) -->
+            <var name="enabled">false</var> <!-- Turn on/off magnifier (true/false) -->
+        </var>
+
+        <var name="breakpoints">
+            <var name="mobile">
+                <var name="conditions">
+                    <var name="max-width">767px</var>
+                </var>
+                <var name="options">
+                    <var name="options">
+                        <var name="nav">dots</var>
+                    </var>
+                </var>
+            </var>
+        </var>
+        <!-- end. Gallery and magnifier theme settings -->
+
+        <var name="product_small_image_sidebar_size">100</var>  <!-- Override for small product image -->
+        <var name="product_base_image_size">275</var>           <!-- Override for base product image -->
+        <var name="product_base_image_icon_size">48</var>       <!-- Base product image icon size -->
+
+        <var name="product_list_image_size">166</var>           <!-- New Product image size used in product list -->
+        <var name="product_zoom_image_size">370</var>           <!-- New Product image size used for zooming -->
+
+        <var name="product_image_white_borders">0</var>
+    </vars>
+    <vars module="Magento_Bundle">
+        <var name="product_summary_image_size">58</var>         <!-- New Product image size used for summary block-->
+    </vars>
+
+    <vars module="Magento_ConfigurableProduct">
+        <var name="gallery_switch_strategy">prepend</var>
+    </vars>
+
+    <vars module="Js_Bundle">
+        <var name="bundle_size">1MB</var>
+    </vars>
+    <exclude>
+        <item type="file">Lib::jquery/jquery.min.js</item>
+        <item type="file">Lib::jquery/jquery-ui-1.9.2.js</item>
+        <item type="file">Lib::jquery/jquery.ba-hashchange.min.js</item>
+        <item type="file">Lib::jquery/jquery.details.js</item>
+        <item type="file">Lib::jquery/jquery.details.min.js</item>
+        <item type="file">Lib::jquery/jquery.hoverIntent.js</item>
+        <item type="file">Lib::jquery/colorpicker/js/colorpicker.js</item>
+        <item type="file">Lib::requirejs/require.js</item>
+        <item type="file">Lib::requirejs/text.js</item>
+        <item type="file">Lib::date-format-normalizer.js</item>
+        <item type="file">Lib::legacy-build.min.js</item>
+        <item type="file">Lib::mage/captcha.js</item>
+        <item type="file">Lib::mage/dropdown_old.js</item>
+        <item type="file">Lib::mage/list.js</item>
+        <item type="file">Lib::mage/loader_old.js</item>
+        <item type="file">Lib::mage/webapi.js</item>
+        <item type="file">Lib::mage/zoom.js</item>
+        <item type="file">Lib::mage/translate-inline-vde.js</item>
+        <item type="file">Lib::mage/requirejs/mixins.js</item>
+        <item type="file">Lib::mage/requirejs/static.js</item>
+        <item type="file">Magento_Customer::js/zxcvbn.js</item>
+        <item type="file">Magento_Catalog::js/zoom.js</item>
+        <item type="file">Magento_Ui::js/lib/step-wizard.js</item>
+        <item type="file">Magento_Ui::js/form/element/ui-select.js</item>
+        <item type="file">Magento_Ui::js/form/element/file-uploader.js</item>
+        <item type="file">Magento_Ui::js/form/components/insert.js</item>
+        <item type="file">Magento_Ui::js/form/components/insert-listing.js</item>
+        <item type="directory">Magento_Ui::js/timeline</item>
+        <item type="directory">Magento_Ui::js/grid</item>
+        <item type="directory">Magento_Ui::js/dynamic-rows</item>
+        <item type="directory">Magento_Ui::templates/timeline</item>
+        <item type="directory">Magento_Ui::templates/grid</item>
+        <item type="directory">Magento_Ui::templates/dynamic-rows</item>
+        <item type="directory">Magento_Swagger::swagger-ui</item>
+        <item type="directory">Lib::modernizr</item>
+        <item type="directory">Lib::tiny_mce</item>
+        <item type="directory">Lib::varien</item>
+        <item type="directory">Lib::jquery/editableMultiselect</item>
+        <item type="directory">Lib::jquery/jstree</item>
+        <item type="directory">Lib::jquery/fileUploader</item>
+        <item type="directory">Lib::css</item>
+        <item type="directory">Lib::lib</item>
+        <item type="directory">Lib::extjs</item>
+        <item type="directory">Lib::prototype</item>
+        <item type="directory">Lib::scriptaculous</item>
+        <item type="directory">Lib::less</item>
+        <item type="directory">Lib::mage/adminhtml</item>
+        <item type="directory">Lib::mage/backend</item>
+    </exclude>
+</view>
+
+
+
+
